@@ -4,14 +4,33 @@ version = "0.1.0"
 description = ""
 authors = ["q1nfo <q1nffos@gmail.com>"]
 readme = "README.md"
-packages = [{include = "todolist_django"}]
+#packages = [{include = "todolist_django"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
 django = "^4.2.7"
 psycopg2-binary = "^2.9.9"
+django-environ = "^0.11.2"
 
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.5.0"
+ansible-vault-win = "^1.0.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+[tools.isort]
+py_version = 310
+profile = 'django'
+line_length = 120
+multi_line_output = 2
+known_first_party = ['config', 'core']
+
+[tool.flake8]
+max_line_length = 120
+per_file_ignores = """
+    */migrations/*: E501,
+"""

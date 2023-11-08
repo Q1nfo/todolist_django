@@ -1,0 +1,63 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15.0-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    expose:
+      - 5432
+    env_file:
+      - ./.env.db
+    volumes:
+      - pg_data_todolist:/var/lib/postgresql/data
+    networks:
+      - backend_nw
+    healthcheck:
+      test: pg_isready -U postgres
+      interval: 5s
+      timeout: 3s
+      retries: 3
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - .env
+    environment:
+      SQL_HOST: db
+    depends_on:
+      - db
+    expose:
+      - 8000
+    ports:
+      - "8000:8000"
+    networks:
+      - backend_nw
+    volumes:
+      - ./src/:/opt/todolist-django
+
+  frontend:
+    image: sermalenk/skypro-front:lesson-35
+    restart: always
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+    volumes:
+      - ./deploy/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./src/static/:/opt/static/
+    networks:
+      - backend_nw
+
+
+
+volumes:
+  pg_data_todolist:
+
+networks:
+  backend_nw:
+    driver: bridge
