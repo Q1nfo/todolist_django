@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["q1nfo <q1nffos@gmail.com>"]
 readme = "README.md"
-packages = [{include = "todolist_django"}]
+#packages = [{include = "todolist_django"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
