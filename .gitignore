@@ -142,3 +142,9 @@ GitHub.sublime-settings
 
 #Linters
 .pre-commit-config.yaml
+
+#Deploy
+deploy/
+
+#Static
+src/static/
