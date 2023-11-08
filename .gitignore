@@ -97,13 +97,13 @@ celerybeat-schedule.*
 *.sage.py
 
 # Environments
-.env
 .venv
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+src/.env
 
 # mkdocs documentation
 /site
@@ -138,3 +138,6 @@ GitHub.sublime-settings
 
 #idea
 .idea/
+
+#Linters
+.pre-commit-config.yaml
