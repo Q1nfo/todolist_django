@@ -4,7 +4,7 @@ from rest_framework.response import Response
 
 from core.models import User
 from core.serializers import (CreateUserSerializer, LoginUserSerializer,
-                              ProfileSerializer)
+                              ProfileSerializer, UpdatePasswordSerializer)
 
 
 class SignUpView(generics.CreateAPIView):
@@ -32,3 +32,11 @@ class ProfileView(generics.RetrieveUpdateDestroyAPIView):
     def destroy(self, request, *args, **kwargs):
         logout(request)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class UpdatePasswordView(generics.UpdateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = UpdatePasswordSerializer
+
+    def get_object(self):
+        return self.request.user
