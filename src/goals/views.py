@@ -8,12 +8,12 @@ from goals.models import Board, Goal, GoalCategory, GoalComment, Status
 from goals.permissions import (BoardPermissions, CommentsPermissions,
                                GoalCategoryPermissions, GoalPermissions,
                                IsOwnerOrReadOnly)
-from goals.serializer import (BoardCreateSerializer, BoardListSerializer,
-                              BoardSerializer, GoalCategoryCreateSerializer,
-                              GoalCategorySerializer,
-                              GoalCommentCreateSerializer,
-                              GoalCommentSerializer, GoalCreateSerializer,
-                              GoalSerializer)
+from goals.serializers import (BoardCreateSerializer, BoardListSerializer,
+                               BoardSerializer, GoalCategoryCreateSerializer,
+                               GoalCategorySerializer,
+                               GoalCommentCreateSerializer,
+                               GoalCommentSerializer, GoalCreateSerializer,
+                               GoalSerializer)
 
 
 class BoardCreateView(generics.CreateAPIView):
