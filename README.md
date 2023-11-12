@@ -46,14 +46,11 @@ Before proceeding make sure you have installed [Docker](https://docs.docker.com/
     $ mv todolist_django example
     $ cd example
 
-    $ export SECRET_KEY=$(python -c "import random; print(''.join(random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789%^&*(-_=+)') for i in range(50)))")
-    $ cat > .env <<EOF
-    DEBUG=on
-    SECRET_KEY='$SECRET_KEY'
+    touch .env && touch .env.db
 
     pip install poetry
     poetry init
-    poetry config virtualenvs.create false && poetry install --no-ansi
+    poetry install --no-ansi
 
 ### Apps
 
