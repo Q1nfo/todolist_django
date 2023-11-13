@@ -11,6 +11,7 @@ class StorageData(BaseModel):
 
 
 class MemoryStorage(Storage):
+    """Класс по управлению временным хранилищем для телеграмм бота"""
 
     def __init__(self):
         self.data: dict[int, StorageData] = {}

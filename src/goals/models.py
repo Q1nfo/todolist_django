@@ -4,6 +4,7 @@ from core.models import User
 
 
 class BaseModel(models.Model):
+    """Модель для определенния полей создано и обновлено"""
     created = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
     updated = models.DateTimeField(verbose_name='Дата последнего обновления', auto_now=True)
 
@@ -12,6 +13,7 @@ class BaseModel(models.Model):
 
 
 class Board(BaseModel):
+    """Модель Доски"""
     title = models.CharField(verbose_name='Название', max_length=255)
     is_deleted = models.BooleanField(verbose_name='Удалена', default=False)
 
@@ -30,6 +32,7 @@ class Role(models.IntegerChoices):
 
 
 class BoardParticipant(BaseModel):
+    """Модель участника доски"""
     board = models.ForeignKey(Board, verbose_name='Доска', on_delete=models.PROTECT, related_name='participants')
     user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.PROTECT, related_name='participants')
     role = models.PositiveSmallIntegerField(verbose_name='Роль', choices=Role.choices, default=Role.owner)
@@ -41,6 +44,7 @@ class BoardParticipant(BaseModel):
 
 
 class GoalCategory(BaseModel):
+    """Модель категории целей"""
     title = models.CharField(verbose_name='Название', max_length=255)
     user = models.ForeignKey(User, verbose_name='Автор', on_delete=models.PROTECT)
     is_deleted = models.BooleanField(verbose_name='Удалена', default=False)
@@ -69,6 +73,7 @@ class Priority(models.IntegerChoices):
 
 
 class Goal(BaseModel):
+    """Моделей целей"""
     title = models.CharField(verbose_name='Название', max_length=255)
     description = models.TextField(verbose_name='Описание', null=True, blank=True),
     category = models.ForeignKey(GoalCategory, verbose_name='Категория', on_delete=models.CASCADE, related_name='goals')
@@ -89,6 +94,7 @@ class Goal(BaseModel):
 
 
 class GoalComment(BaseModel):
+    """Модель комментариев под целями"""
     user = models.ForeignKey(User, verbose_name='Автор', on_delete=models.PROTECT, related_name='comments')
     goal = models.ForeignKey(Goal, verbose_name='Цель', on_delete=models.CASCADE, related_name='comments')
     text = models.TextField(verbose_name='Комментарий')

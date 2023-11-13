@@ -4,6 +4,7 @@ from bot.tg.models import GetUpdatesResponse, SendMessageResponse
 
 
 class TgClient:
+    """Класс для управлением действий клиента телеграмм бота"""
     def __init__(self, token: str):
         self.token = token
 
